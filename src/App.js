@@ -8,19 +8,22 @@ import store from './store/store';
 import { Provider } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getCallData } from './store/actions/activity-feed-actions';
+import ActivityFeed from './components/Activity/ActivityFeed';
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCallData());
-  }, [dispatch])
+  }, [])
 
   return (
     <div className={styles.app}>
       <div className={styles.container}>
         <Header />
-        <div className={styles['container-view']}>Some activities should be here</div>
+        <div className={styles['container-view']}>
+          <ActivityFeed />
+        </div>
       </div>
     </div>
   );

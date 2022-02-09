@@ -19,7 +19,7 @@ export const getCallData = () => {
         try {
             const calls = await fetchCalls()
 
-            dispatch(activityFeedActions.getCalls(calls))
+            dispatch(activityFeedActions.getCalls({ calls }));
         }
         catch (error) {
             console.log(error);
