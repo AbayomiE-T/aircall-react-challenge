@@ -22,8 +22,33 @@ export const getCallData = () => {
             dispatch(activityFeedActions.getCalls({ calls }));
         }
         catch (error) {
-            console.log(error);
+            console.log(error.message);
         }
 
+    }
+}
+
+export const getCallDetail = (id) => {
+    return async (dispatch) => {
+        const fetchCallDetail = async () => {
+            const response = await fetch(`${baseUrl}/activities/${id}`);
+
+            if (!response.ok) {
+                throw new Error('Could not fetch call detail :(')
+            }
+
+            const data = await response.json();
+
+            return data;
+        }
+
+        try {
+            const callDetail = await fetchCallDetail();
+
+            dispatch(activityFeedActions.getCallDetail(callDetail));
+        }
+        catch (error) {
+            console.log(error.message);
+        }
     }
 }

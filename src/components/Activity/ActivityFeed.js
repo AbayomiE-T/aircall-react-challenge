@@ -12,6 +12,7 @@ const ActivityFeed = () => {
                 return (
                     <ActivityItem
                         key={call.id}
+                        id={call.id}
                         date={call.created_at}
                         from={call.from}
                         to={call.to}
@@ -29,6 +30,7 @@ const ActivityFeed = () => {
             {showAllCalls && calls.length !== 0 && calls.map((call) => {
                 return (<ActivityItem
                     key={call.id}
+                    id={call.id}
                     date={call.created_at}
                     from={call.from}
                     to={call.to}

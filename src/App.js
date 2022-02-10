@@ -4,12 +4,13 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import styles from './index.module.css';
 import Header from './components/Navigation/Header';
+import ActivityFeed from './components/Activity/ActivityFeed';
+import ActivityDetail from './components/Activity/ActivityDetail';
 
 import store from './store/store';
 import { Provider } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getCallData } from './store/actions/activity-feed-actions';
-import ActivityFeed from './components/Activity/ActivityFeed';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,8 +26,11 @@ const App = () => {
           <Header />
           <div className={styles['container-view']}>
             <Switch>
-              <Route path="/">
+              <Route exact path="/">
                 <ActivityFeed />
+              </Route>
+              <Route path="/activities/:id">
+                <ActivityDetail />
               </Route>
             </Switch>
           </div>
@@ -36,6 +40,6 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<Provider store={store}><Router><App /></Router></Provider>, document.getElementById('app'));
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('app'));
 
 export default App;
