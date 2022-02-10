@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import styles from './index.module.css';
 import Header from './components/Navigation/Header';
@@ -18,17 +19,23 @@ const App = () => {
   }, [])
 
   return (
-    <div className={styles.app}>
-      <div className={styles.container}>
-        <Header />
-        <div className={styles['container-view']}>
-          <ActivityFeed />
+    <Router>
+      <div className={styles.app}>
+        <div className={styles.container}>
+          <Header />
+          <div className={styles['container-view']}>
+            <Switch>
+              <Route path="/">
+                <ActivityFeed />
+              </Route>
+            </Switch>
+          </div>
         </div>
       </div>
-    </div>
+    </Router>
   );
 };
 
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('app'));
+ReactDOM.render(<Provider store={store}><Router><App /></Router></Provider>, document.getElementById('app'));
 
 export default App;
