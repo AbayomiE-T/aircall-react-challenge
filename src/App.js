@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import styles from './index.module.css';
-import Header from './Header';
+import Header from './components/Navigation/Header';
 
 import store from './store/store';
 import { Provider } from 'react-redux';

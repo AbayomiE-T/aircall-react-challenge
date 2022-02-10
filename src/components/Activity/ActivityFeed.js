@@ -4,9 +4,29 @@ import ActivityItem from './ActivityItem';
 
 const ActivityFeed = () => {
     const calls = useSelector(state => state.activities.calls);
+    const showAllCalls = useSelector(state => state.ui.showAll);
+
+    const filterForMissedCalls = () => {
+        return calls.filter((call) => call.call_type === "missed")
+            .map((call) => {
+                return (
+                    <ActivityItem
+                        key={call.id}
+                        date={call.created_at}
+                        from={call.from}
+                        to={call.to}
+                        via={call.via}
+                        direction={call.direction}
+                        callType={call.call_type}
+                    />
+                )
+            });
+    }
+
+    const showMissedCalls = calls.length !== 0 ? filterForMissedCalls() : [];
     return (
         <Fragment>
-            {calls.length !== 0 && calls.map((call) => {
+            {showAllCalls && calls.length !== 0 && calls.map((call) => {
                 return (<ActivityItem
                     key={call.id}
                     date={call.created_at}
@@ -17,6 +37,7 @@ const ActivityFeed = () => {
                     callType={call.call_type}
                 />)
             })}
+            {!showAllCalls && showMissedCalls}
         </Fragment>
     )
 }
