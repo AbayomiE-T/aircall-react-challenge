@@ -4,7 +4,8 @@ const activityFeedSlice = createSlice({
     name: 'activityFeed',
     initialState: {
         calls: [],
-        callDetail: null
+        callDetail: null,
+        archivedCalls: []
     },
     reducers: {
         getCalls(state, action) {
@@ -13,6 +14,12 @@ const activityFeedSlice = createSlice({
 
         getCallDetail(state, action) {
             state.callDetail = action.payload;
+        },
+
+        addToArchives(state, action) {
+            const callToArchive = state.calls.find((call) => call.id === action.payload);
+            callToArchive['is_archived'] = true;
+            state.archivedCalls.push(callToArchive);
         }
     }
 })

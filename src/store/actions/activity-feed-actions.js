@@ -52,3 +52,31 @@ export const getCallDetail = (id) => {
         }
     }
 }
+
+export const addToArchives = (id) => {
+    return async (dispatch) => {
+        const archiveCall = async () => {
+            const response = await fetch(`${baseUrl}/activities/${id}`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ "is_archived": true })
+                })
+
+            if (!response.ok) {
+                throw new Error("Could not archive call data :(");
+            }
+        }
+
+        try {
+            await archiveCall();
+
+            dispatch(activityFeedActions.addToArchives(id))
+        }
+        catch (error) {
+            console.log(error.message);
+        }
+    }
+}

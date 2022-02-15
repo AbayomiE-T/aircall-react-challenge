@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { showAllCalls, showMissedCalls } from '../../store/actions/ui-actions';
 import styles from './Header.module.css'
 
 const Header = () => {
   const dispatch = useDispatch();
+  const [isInboxButtonActive, setisInboxButtonActive] = useState(false);
+  const [isAllCallsButtonActive, setisAllCallsButtonActive] = useState(true);
 
   const showMissedCallsHandler = () => {
+    setisInboxButtonActive(true);
+    setisAllCallsButtonActive(false);
     dispatch(showMissedCalls());
   }
 
   const showAllCallsHandler = () => {
+    setisInboxButtonActive(false);
+    setisAllCallsButtonActive(true);
     dispatch(showAllCalls());
   }
 
@@ -33,8 +39,14 @@ const Header = () => {
       </svg>
 
       <section className={styles.navigation}>
-        <button onClick={showMissedCallsHandler}>Inbox</button>
-        <button onClick={showAllCallsHandler}>All Calls</button>
+        <button className={styles.button} onClick={showMissedCallsHandler}>
+          <span>Inbox</span>
+          <div className={isInboxButtonActive ? styles.highlight : ''}></div>
+        </button>
+        <button className={styles.button} onClick={showAllCallsHandler}>
+          <span>All Calls</span>
+          <div className={isAllCallsButtonActive ? styles.highlight : ''}></div>
+        </button>
       </section>
     </header>
   );

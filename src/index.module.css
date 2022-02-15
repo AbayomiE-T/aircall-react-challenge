@@ -37,6 +37,8 @@ html, body, h1, h2, h3, ul, li {
   
  .container-view {
     padding: 20px;
+    height: 450px;
+    overflow-y: scroll;
   }
 
   header {
@@ -52,5 +54,10 @@ html, body, h1, h2, h3, ul, li {
   header svg {
     display: inline-block;
     width: 35%; height: 100%;
+  }
+
+  a{
+    text-decoration: none;
+    color: inherit;
   }
 

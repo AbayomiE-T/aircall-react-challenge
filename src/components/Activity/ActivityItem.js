@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom'
 import Card from '../UI/Card'
 
 const ActivityItem = (props) => {
+    const date = new Date(props.date);
+    const hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes();
+    const meridiem = hours >= 12 ? 'PM' : 'AM';
+
     return (
         <Link to={`/activities/${props.id}`}>
             <Card>
@@ -13,7 +18,7 @@ const ActivityItem = (props) => {
                     {props.callType !== "voicemail" && (<span>tried to call on {props.to}</span>)}
                 </div>
                 <div>
-                    time???
+                    {`${hours}:${minutes}` + meridiem}
                 </div>
             </Card>
         </Link>

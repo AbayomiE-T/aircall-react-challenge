@@ -1,4 +1,35 @@
 .navigation{
     display: flex;
     align-items: center;
+    justify-content: space-around;
+    background-color: #D0D0D0;
+    width: 50%;
+}
+
+.button{
+    display:inline-block;
+    height: 100%;
+    width: 70px;
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    position: relative;
+}
+
+.button:hover{
+    font-size: medium;
+    font-weight: 600;
+}
+
+.highlight{
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom: 3px solid  #ff531a;
+    width: 50%;
 }
