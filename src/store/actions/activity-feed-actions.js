@@ -62,7 +62,7 @@ export const addToArchives = (id) => {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ "is_archived": false })
+                    body: JSON.stringify({ "is_archived": true })
                 })
 
             if (!response.ok) {

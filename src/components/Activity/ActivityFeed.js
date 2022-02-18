@@ -28,16 +28,18 @@ const ActivityFeed = () => {
     return (
         <Fragment>
             {showAllCalls && calls.length !== 0 && calls.map((call) => {
-                return (<ActivityItem
-                    key={call.id}
-                    id={call.id}
-                    date={call.created_at}
-                    from={call.from}
-                    to={call.to}
-                    via={call.via}
-                    direction={call.direction}
-                    callType={call.call_type}
-                />)
+                if (!call['is_archived']) {
+                    return (<ActivityItem
+                        key={call.id}
+                        id={call.id}
+                        date={call.created_at}
+                        from={call.from}
+                        to={call.to}
+                        via={call.via}
+                        direction={call.direction}
+                        callType={call.call_type}
+                    />)
+                }
             })}
             {!showAllCalls && showMissedCalls}
         </Fragment>

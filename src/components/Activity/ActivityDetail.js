@@ -15,7 +15,10 @@ const ActivityDetail = () => {
 
     const archiveHandler = () => {
         dispatch(addToArchives(id));
-        history.go(-1);
+
+        setTimeout(() => {
+            history.go(-1);
+        }, 1000)
     }
 
     return (
