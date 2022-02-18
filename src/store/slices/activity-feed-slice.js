@@ -1,11 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const activityFeedSlice = createSlice({
     name: 'activityFeed',
     initialState: {
         calls: [],
         callDetail: null,
-        archivedCalls: []
+        archivedCalls: localStorage.getItem('archivedCalls') ?
+            JSON.parse(localStorage.getItem('archivedCalls')) : []
     },
     reducers: {
         getCalls(state, action) {
@@ -17,12 +18,19 @@ const activityFeedSlice = createSlice({
         },
 
         addToArchives(state, action) {
-            const callToArchive = state.calls.find((call) => call.id === action.payload);
+            const id = +action.payload;
+            const callToArchive = state.calls.find((call) => call.id === id);
             callToArchive['is_archived'] = true;
             state.archivedCalls.push(callToArchive);
+
+            cacheArchivedCalls(state.archivedCalls);
         }
     }
 })
+
+const cacheArchivedCalls = (calls) => {
+    localStorage.setItem('archivedCalls', JSON.stringify([...calls]));
+}
 
 export const activityFeedActions = activityFeedSlice.actions;
 
